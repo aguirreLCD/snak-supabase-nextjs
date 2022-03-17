@@ -3,7 +3,12 @@ import { supabase } from '../utils/supabaseClient'
 
 import Avatar from './Avatar'
 
+import { useRouter } from 'next/router';
+
 export default function Account({ session }) {
+
+  const router = useRouter();
+
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState(null)
   const [website, setWebsite] = useState(null)
@@ -29,6 +34,7 @@ export default function Account({ session }) {
       }
 
       if (data) {
+        console.log(data);
         setUsername(data.username)
         setWebsite(data.website)
         setAvatarUrl(data.avatar_url)
@@ -38,7 +44,10 @@ export default function Account({ session }) {
     } finally {
       setLoading(false)
     }
+    
   }
+  
+
 
   async function updateProfile({ username, website, avatar_url }) {
     try {
@@ -95,12 +104,12 @@ export default function Account({ session }) {
       </div>
 
       <Avatar
-      url={avatar_url}
-      size={150}
-      onUpload={(url) => {
-        setAvatarUrl(url)
-        updateProfile({ username, website, avatar_url: url })
-      }}
+        url={avatar_url}
+        size={150}
+        onUpload={(url) => {
+            setAvatarUrl(url)
+            updateProfile({ username, website, avatar_url: url })
+        }}
     />
 
 
@@ -114,13 +123,38 @@ export default function Account({ session }) {
         </button>
       </div>
 
+    <div>
+        <button 
+            className="button block" 
+            onClick={(event) => {
+                event.preventDefault();
+                router.push("/snak");
+            }} >
+          Sign In
+        </button>          
+    </div>
 
+
+     <div>
+        <button 
+            className="button block" 
+            onClick={(event) => {
+                event.preventDefault();
+                router.push("/chat");
+            }} >
+          Chat
+        </button>          
+    </div>
 
       <div>
         <button className="button block" onClick={() => supabase.auth.signOut()}>
           Sign Out
         </button>
       </div>
+
+
+
+     
     </div>
   )
 }

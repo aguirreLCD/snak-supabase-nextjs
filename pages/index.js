@@ -16,8 +16,13 @@ export default function Home() {
   }, [])
 
   return (
+    <>
+    
+    
     <div className="container" style={{ padding: '50px 0 100px 0' }}>
+      <h1>Home</h1>
       {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
     </div>
+    </>
   )
 }
