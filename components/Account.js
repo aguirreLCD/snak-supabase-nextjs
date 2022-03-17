@@ -113,6 +113,9 @@ export default function Account({ session }) {
     />
 
 
+         
+
+
       <div>
         <button
           className="button block primary"
@@ -122,6 +125,17 @@ export default function Account({ session }) {
           {loading ? 'Loading ...' : 'Update'}
         </button>
       </div>
+
+
+     <div>
+        <button className="button block">     
+         <a href={"https://aluracord-matrix-tau-five.vercel.app"}>
+              Fun With Chats
+            </a>       
+        </button>   
+        </div>
+
+
 
     <div>
         <button 
@@ -145,6 +159,12 @@ export default function Account({ session }) {
           Chat
         </button>          
     </div>
+
+
+
+     
+
+
 
       <div>
         <button className="button block" onClick={() => supabase.auth.signOut()}>
